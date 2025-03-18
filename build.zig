@@ -17,7 +17,7 @@ pub fn build(b: *std.Build) void {
     // const run_exe = b.addRunArtifact(exe);
     // run_step.dependOn(&run_exe.step);
 
-    const cmodule = b.addModule("cmpmc", .{
+    const cmodule = b.addModule("mpmc", .{
         .root_source_file = b.path("src/lib.zig"),
         .target = target,
         .optimize = optimize,
