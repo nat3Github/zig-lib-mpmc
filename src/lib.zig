@@ -33,14 +33,14 @@ fn C_SCQ(order: usize) type {
         }
     };
 }
-pub const MpmcSqcConfig = struct {
+pub const MPMC_SQC_Config = struct {
     // size = 2 to the power of order;
     order: usize,
     T: type,
     // slot count
     slot_count: usize,
 };
-pub fn MpmcSqc(cfg: MpmcSqcConfig) type {
+pub fn MPMC_SQC(cfg: MPMC_SQC_Config) type {
     if (!(cfg.slot_count <= std.math.powi(usize, 2, cfg.order) catch unreachable)) {
         "specified slot count to big for the given order";
     }
@@ -182,7 +182,7 @@ fn test_indirect_scq_init() !void {
     const thread_count = 4;
     const thread_slots = 4;
     const T = TestStruct;
-    const MPSC = MpmcSqc(.{
+    const MPSC = MPMC_SQC(.{
         .order = 8,
         .slot_count = thread_count * thread_slots,
         .T = T,
