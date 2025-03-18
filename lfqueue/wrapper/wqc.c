@@ -2,7 +2,6 @@
 #include "../wfring_cas2.h"
 
 void wqc_init(struct wfring *ring, size_t order) {
-    
   return wfring_init_empty(ring, order);
 }
 

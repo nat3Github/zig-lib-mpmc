@@ -204,7 +204,7 @@ fn test_indirect_scq_init() !void {
     defer xmpsc.deinit(alloc);
 }
 
-fn test_the_shit() !void {
+fn test_the_c_stuff() !void {
     var gpa = std.heap.DebugAllocator(.{}).init;
     const alloc = gpa.allocator();
     _ = c;
@@ -231,7 +231,7 @@ fn test_the_shit() !void {
     std.log.warn("hello wk", .{});
 }
 test "test the shit" {
-    // try test_the_shit();
+    // try test_the_c_stuff();
 }
 
 fn to_anyopaque(ptr: anytype) ?*anyopaque {
