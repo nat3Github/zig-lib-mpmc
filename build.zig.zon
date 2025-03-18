@@ -1,0 +1,14 @@
+.{
+    .fingerprint = 0xb811bd9a3b74ad23,
+    .name = .mpmc,
+    .version = "0.0.0",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "sqlite-src",
+        "src",
+        // "LICENSE",
+        "README.md",
+    },
+}
