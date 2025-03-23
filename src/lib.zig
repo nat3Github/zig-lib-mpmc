@@ -42,7 +42,7 @@ pub const MPMC_SQC_Config = struct {
 };
 pub fn MPMC_SQC(cfg: MPMC_SQC_Config) type {
     if (!(cfg.slot_count <= std.math.powi(usize, 2, cfg.order) catch unreachable)) {
-        "specified slot count to big for the given order";
+        @compileError("specified slot count to big for the given order");
     }
     return struct {
         const This = @This();
