@@ -48,6 +48,8 @@ pub fn MPMC_SQC(cfg: MPMC_SQC_Config) type {
         const This = @This();
         const T = cfg.T;
         const order = cfg.order;
+        const mem_order_store = std.builtin.AtomicOrder.release;
+        const mem_order_load = std.builtin.AtomicOrder.acquire;
         const OccupyError = error.SlotWasNotPopped;
         q: C_SCQ(cfg.order),
         heap: []?*T,
@@ -70,17 +72,17 @@ pub fn MPMC_SQC(cfg: MPMC_SQC_Config) type {
         pub fn push(self: *This, slot: usize, ptr: *T) !void {
             assert(slot < self.heap.len);
             const slotptr = &self.heap[slot];
-            const current_slot = @atomicLoad(?*T, slotptr, .acquire);
+            const current_slot = @atomicLoad(?*T, slotptr, mem_order_load);
             if (current_slot != null) return OccupyError;
-            @atomicStore(?*T, slotptr, ptr, .release);
+            @atomicStore(?*T, slotptr, ptr, mem_order_store);
             self.q.push(slot);
         }
         pub fn pop(self: *This) ?*T {
             if (self.q.pop()) |slot| {
                 const slotptr = &self.heap[slot];
-                const res = @atomicLoad(?*T, slotptr, .acquire);
+                const res = @atomicLoad(?*T, slotptr, mem_order_load);
                 const ptr = res.?;
-                @atomicStore(?*T, slotptr, null, .release);
+                @atomicStore(?*T, slotptr, null, mem_order_store);
                 return ptr;
             } else return null;
         }
