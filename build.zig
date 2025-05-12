@@ -5,17 +5,6 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const test_step = b.step("test", "Test the test application");
-    // const run_step = b.step("run", "Run the test application");
-    // const exe = b.addExecutable(.{
-    //     .name = "sqlite-test",
-    //     .root_source_file = b.path("src/example.zig"),
-    //     .optimize = optimize,
-    //     .target = target,
-    // });
-    // exe.root_module.addImport("cmpmc", cmodule);
-
-    // const run_exe = b.addRunArtifact(exe);
-    // run_step.dependOn(&run_exe.step);
 
     const cmodule = b.addModule("mpmc", .{
         .root_source_file = b.path("src/lib.zig"),

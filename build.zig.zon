@@ -6,7 +6,7 @@
     .paths = .{
         "build.zig",
         "build.zig.zon",
-        "sqlite-src",
+        "lfqueue",
         "src",
         // "LICENSE",
         "README.md",
